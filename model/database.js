@@ -19,7 +19,7 @@ con.connect(function(err) {
   console.log("Connected!");
 
   let sql =
-    " drop table if exists favourites; CREATE TABLE `favourites` (`recipename` VARCHAR(255) NOT NULL,`cuisineType` VARCHAR(255) NOT NULL,`mealType` VARCHAR(255) NOT NULL,`id` INT NOT NULL AUTO_INCREMENT,PRIMARY KEY (`id`));";
+    "drop table if exists favourites; CREATE TABLE `favourites` (`recipename` VARCHAR(255) NOT NULL,`cuisineType` VARCHAR(255) NOT NULL,`mealType` VARCHAR(255) NOT NULL,`id` INT NOT NULL AUTO_INCREMENT,PRIMARY KEY (`id`));";
   con.query(sql, function(err, result) {
     if (err) throw err;
     console.log("Table creation `students` was successful!");
