@@ -14,6 +14,9 @@ function App() {
   const [error, setError] = useState("");
   const [query, setquery] = useState("");
   const [healthLabels, sethealthLabels] = useState("vegan")
+  const [myfavourites, setmyfavourites] = useState(null);
+
+  let url = `https://api.edamam.com/search?q=${query}&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&health=${healthLabels}`;
 
   const getRecipes = async () => {
 
@@ -22,10 +25,6 @@ function App() {
     //   Reset the value
      setRecipes(null);
      setError("");
-
-     
-  const url = `https://api.edamam.com/search?q=${query}&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&health=${healthLabels}`;
-   
 
      try {
        const response = await fetch(url);
@@ -46,10 +45,36 @@ function App() {
   //this submit prevents default reloading 
   const onSubmit = (e) => {
     e.preventDefault();
-    getRecipes();
+
+    if (e.target.id == "1") {
+      setError("");
+      setmyfavourites(null);
+      getRecipes();
+    } else {
+    setError("");
+    setRecipes(null);
+  //   getFavourites();
+  } };
+
+
+  const handleChange = e => {
+    // handle key presses
+    sethealthLabels(e.target.value);
   };
 
-
+  const getFavourites = async () => {
+    
+      fetch("/favourites")
+        .then(response => response.json())
+        .then(recipe => {
+          //check this set favourites
+          setmyfavourites(recipe);
+         })
+        .catch(error => {
+          console.log(error);
+         });
+    };
+ 
 
   return (
     <div className="app">
@@ -61,36 +86,59 @@ function App() {
       placeholder="enter ingredient"
       value={query} 
       onChange={(e) => setquery(e.target.value)} />
-    <input 
-    type="submit"
-    className="app_submit" 
-    value="Search" />
+        
+    <select className= "app_healthLabels" value={healthLabels} onChange={handleChange}>
+    {/* <select className= "app_healthLabels">  */}
 
-    
-    {/* <select className= "app_healthLabels" value={healthLabels}> */}
-    <select className= "app_healthLabels">
-      
-<option onClick={()=> sethealthLabels("vegan")}>Vegan</option>
-<option onClick={()=> sethealthLabels("alcohol-free")}>Alcohol-free</option>
-<option onClick={()=> sethealthLabels("alcohol-cocktail")}>Alcohol-Cocktail</option>
-<option onClick={()=> sethealthLabels("celery-free")}>Celery-free</option>
+    <option value = "vegan">Vegan</option>
+    <option value = "wheat-free">Wheat-free</option>
+    <option value = "dairy-free">Dairy-free</option>
+    <option value = "egg-free">Egg-free</option>
+    <option value = "fish-free">Fish-free</option>
+    <option value = "low-sugar">Low-Sugar</option>
+    <option value = "gluten-free">Gluten-free</option>
+    <option value = "tree-nut-free">Tree-nut-free</option>
+    <option value = "peanut-free">Peanut-free</option>
+    <option value = "vegetarian">Vegetarian</option>
+
+
+{/* <option onClick={()=> sethealthLabels("vegan")}>Vegan</option>
 <option onClick={()=> sethealthLabels("wheat-free")}>Wheat-free</option>
 <option onClick={()=> sethealthLabels("dairy-free")}>Dairy-free</option>
-<option onClick={()=> sethealthLabels("DASH")}>DASH</option>
 <option onClick={()=> sethealthLabels("egg-free")}>Egg-free</option>
 <option onClick={()=> sethealthLabels("fish-free")}>Fish-free</option>
 <option onClick={()=> sethealthLabels("low-sugar")}>Low-Sugar</option>
 <option onClick={()=> sethealthLabels("gluten-free")}>Gluten-free</option>
-<option onClick={()=> sethealthLabels("immuno-supportive")}>Immuno-supportive</option>
-<option onClick={()=> sethealthLabels("vegan")}>Vegan</option>
-<option onClick={()=> sethealthLabels("vegetarian")}>Vegetarian</option>
-    </select>
+<option onClick={()=> sethealthLabels("tree-nut-free")}>Tree-nut-free</option>
+<option onClick={()=> sethealthLabels("peanut-free")}>Peanut-free</option>
+<option onClick={()=> sethealthLabels("vegetarian")}>Vegetarian</option> */}
+
+    </select> 
+
+    <button 
+    type="submit"
+    className="app_submit" 
+    id="1"
+    onClick={onSubmit}>
+    Search</button>  
+
+   <button 
+    type="submit"
+    className="app_myfavourites" 
+    id="2"
+    onClick={onSubmit}>
+    Display My Favourites</button>
+
     </form>
     <div className="app_recipes">
 
       {/* //rendering */}
       {recipes && recipes.map((recipe) => {
         return<RecipeTile recipe={recipe}/>;
+      })}
+
+      {myfavourites && myfavourites.map(() => {
+        return(myfavourites);
       })}
 
     </div>
