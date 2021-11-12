@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 import "./App.css";
 import RecipeTile from "./RecipeTile";
 
@@ -9,15 +10,20 @@ function App() {
   const YOUR_APP_ID = "9a922325"
   const YOUR_APP_KEY = "96453a31e5925836a664cd6d5cd82a3b"	
   
+  const [ingredients, setingredients] = useState([]);
   const [loading, setLoading] = useState(false);
   const [recipes, setRecipes] = useState(null);
   const [error, setError] = useState("");
   const [query, setquery] = useState("");
   const [healthLabels, sethealthLabels] = useState("vegan")
-  const [myfavourites, setmyfavourites] = useState(null);
+  const [myfavourites, setmyfavourites] = useState([]);
 
   let url = `https://api.edamam.com/search?q=${query}&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&health=${healthLabels}`;
 
+  useEffect(() => {
+  getFavourites()
+  }, [])
+  
   const getRecipes = async () => {
 
     setLoading(true);
@@ -48,7 +54,7 @@ function App() {
 
     if (e.target.id == "1") {
       setError("");
-      setmyfavourites(null);
+      
       getRecipes();
     } else {
     setError("");
@@ -64,12 +70,12 @@ function App() {
 
   const getFavourites = async () => {
     
-      fetch("/favourites")
+     await fetch("/favourites")
         .then(response => response.json())
-        .then(recipe => {
+        .then(recipe =>
           //check this set favourites
-          setmyfavourites(recipe);
-         })
+          setmyfavourites(recipe)
+         )
         .catch(error => {
           console.log(error);
          });
@@ -88,7 +94,7 @@ function App() {
       onChange={(e) => setquery(e.target.value)} />
         
     <select className= "app_healthLabels" value={healthLabels} onChange={handleChange}>
-    {/* <select className= "app_healthLabels">  */}
+    
 
     <option value = "vegan">Vegan</option>
     <option value = "wheat-free">Wheat-free</option>
@@ -100,18 +106,11 @@ function App() {
     <option value = "tree-nut-free">Tree-nut-free</option>
     <option value = "peanut-free">Peanut-free</option>
     <option value = "vegetarian">Vegetarian</option>
-
-
-{/* <option onClick={()=> sethealthLabels("vegan")}>Vegan</option>
-<option onClick={()=> sethealthLabels("wheat-free")}>Wheat-free</option>
-<option onClick={()=> sethealthLabels("dairy-free")}>Dairy-free</option>
-<option onClick={()=> sethealthLabels("egg-free")}>Egg-free</option>
-<option onClick={()=> sethealthLabels("fish-free")}>Fish-free</option>
-<option onClick={()=> sethealthLabels("low-sugar")}>Low-Sugar</option>
-<option onClick={()=> sethealthLabels("gluten-free")}>Gluten-free</option>
-<option onClick={()=> sethealthLabels("tree-nut-free")}>Tree-nut-free</option>
-<option onClick={()=> sethealthLabels("peanut-free")}>Peanut-free</option>
-<option onClick={()=> sethealthLabels("vegetarian")}>Vegetarian</option> */}
+    <option value = "alcohol-free">Alcohol-free</option>
+    <option value = "alcohol-cocktail">Alcohol-cocktail</option>
+    <option value = "sulfite-free">Sulfite-free</option>
+    <option value = "vegetarian">Vegetarian</option>
+     
 
     </select> 
 
@@ -137,9 +136,9 @@ function App() {
         return<RecipeTile recipe={recipe}/>;
       })}
 
-      {myfavourites && myfavourites.map(() => {
-        return(myfavourites);
-      })}
+      {myfavourites.map((recipe) => 
+        <p>{recipe.recipename}</p>
+      )}
 
     </div>
     </div>

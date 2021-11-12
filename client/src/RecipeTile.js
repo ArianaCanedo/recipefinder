@@ -3,17 +3,18 @@ import './RecipeTile.css';
 
 export default function RecipeTile({ recipe }) {
 
-    //Funcation to Save the Favourites
+    //Function to Save to my Favourites
     const handleSubmit = e => {
         e.preventDefault();
         
         let options = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(recipe.recipe.label, recipe.recipe.cuisineType[0], recipe.recipe.mealType[0])
+            body: JSON.stringify({recipename:recipe.recipe.label, cuisineType:recipe.recipe.cuisineType[0], mealType:recipe.recipe.mealType[0]})
           };
       
-        //  let response = fetch("/favourites", options);
+         let response = fetch("/favourites", options);
+         console.log(response);
          // need to improve the code handling response success or not          
           alert("Added to Favourites Successfully");
     }
@@ -21,16 +22,31 @@ export default function RecipeTile({ recipe }) {
     
     const handleSubmit11 = e => {
         e.preventDefault();
-
         //display the ingredients
 
     }
+// //to insert a new pokemon into my database
 
+// app.post("/pokemon", function(req, res) {
+//     //get pokemon data from request body
+//     console.log(req.body);
+//     //see if this id already exists
+//     let pokemon = data.find(p => p.id == newPokemon.id);
+//     //if pokemon exists then return 409 error
+//     if (pokemon) {
+//       res.status(409).send({ error: "pokemon already exists" });
+//     } else {
+//       data.push(newPokemon);
+//       //status code 201 means : new pokemon created
+//       res.status(201).send(newPokemon);
+//     }
+//   });
+  
 
     return (
         <div className="recipeTile">
 
-            <img className= "recipeTile_img" src={recipe["recipe"]["image"]} onClick={handleSubmit11}/>
+            <img className= "recipeTile_img" src={recipe["recipe"]["image"]} onClick={() => handleSubmit11()}/>
             <p className= "recipeTile_name">{recipe["recipe"]["label"]}</p>
             <button type="submit" 
                     className= "bt_favourite" 
