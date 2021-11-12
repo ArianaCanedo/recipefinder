@@ -16,9 +16,10 @@ const db = require("../model/helper");
   router.post("/", async (req, res) => {
     
     try {
-      const { recipename, cuisineType, mealType } = req.body;
+      const { recipename, cuisineType, mealType, shareAs, image } = req.body;
      
-      await db(`INSERT INTO favourites (recipename, cuisineType, mealType) VALUES ("${recipename}", "${cuisineType}", "${mealType}");`);
+      await db(`INSERT INTO favourites (recipename, cuisineType, mealType, shareAs, image) 
+      VALUES ("${recipename}", "${cuisineType}", "${mealType}", "${shareAs}", "${image}");`);
       const results = await db("SELECT * FROM favourites ORDER BY id ASC");
   
       res.send(results.data);

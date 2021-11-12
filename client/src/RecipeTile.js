@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import {Link} from "react-router-dom";
 import './RecipeTile.css';
 
 export default function RecipeTile({ recipe }) {
@@ -10,7 +11,8 @@ export default function RecipeTile({ recipe }) {
         let options = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({recipename:recipe.recipe.label, cuisineType:recipe.recipe.cuisineType[0], mealType:recipe.recipe.mealType[0]})
+            body: JSON.stringify({recipename:recipe.recipe.label, cuisineType:recipe.recipe.cuisineType[0], 
+                mealType:recipe.recipe.mealType[0], shareAs:recipe.recipe.shareAs, image:recipe.recipe.image})
           };
       
          let response = fetch("/favourites", options);
@@ -18,7 +20,10 @@ export default function RecipeTile({ recipe }) {
          // need to improve the code handling response success or not          
           alert("Added to Favourites Successfully");
     }
-
+    
+    useEffect(() => {
+       console.log(recipe.recipe.shareAs);
+    }, [])
     
     const handleSubmit11 = e => {
         e.preventDefault();
@@ -46,8 +51,9 @@ export default function RecipeTile({ recipe }) {
     return (
         <div className="recipeTile">
 
-            <img className= "recipeTile_img" src={recipe["recipe"]["image"]} onClick={() => handleSubmit11()}/>
+            <a href={recipe.shareAs}><img className= "recipeTile_img" src={recipe["recipe"]["image"]} /> </a>
             <p className= "recipeTile_name">{recipe["recipe"]["label"]}</p>
+            <a href={`${recipe.recipe.shareAs}`}> check recipe</a>
             <button type="submit" 
                     className= "bt_favourite" 
                     onClick={handleSubmit}
