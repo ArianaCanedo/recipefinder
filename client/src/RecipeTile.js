@@ -25,32 +25,10 @@ export default function RecipeTile({ recipe }) {
        console.log(recipe.recipe.shareAs);
     }, [])
     
-    const handleSubmit11 = e => {
-        e.preventDefault();
-        //display the ingredients
-
-    }
-// //to insert a new pokemon into my database
-
-// app.post("/pokemon", function(req, res) {
-//     //get pokemon data from request body
-//     console.log(req.body);
-//     //see if this id already exists
-//     let pokemon = data.find(p => p.id == newPokemon.id);
-//     //if pokemon exists then return 409 error
-//     if (pokemon) {
-//       res.status(409).send({ error: "pokemon already exists" });
-//     } else {
-//       data.push(newPokemon);
-//       //status code 201 means : new pokemon created
-//       res.status(201).send(newPokemon);
-//     }
-//   });
-  
 
     return (
+        recipe["recipe"] ["image"].match(/\.(jpeg|jpg|gif|png)$/) != null && (
         <div className="recipeTile">
-
             <a href={recipe.shareAs}><img className= "recipeTile_img" src={recipe["recipe"]["image"]} /> </a>
             <p className= "recipeTile_name">{recipe["recipe"]["label"]}</p>
             <a href={`${recipe.recipe.shareAs}`}> check recipe</a>
@@ -61,7 +39,7 @@ export default function RecipeTile({ recipe }) {
              Add to favourites 
              </button>
         </div>
-          
+        )   
     );
 }
 

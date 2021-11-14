@@ -87,6 +87,7 @@ export default function Home() {
     return (
         <div className="app">
         <h1>Recipe Finder App</h1>
+        <div> </div>
         <form className="app_searchForm" onSubmit={onSubmit}>
           <input 
           type="text" 
@@ -96,8 +97,7 @@ export default function Home() {
           onChange={(e) => setquery(e.target.value)} />
             
         <select className= "app_healthLabels" value={healthLabels} onChange={handleChange}>
-        
-    
+                
         <option value = "vegan">Vegan</option>
         <option value = "wheat-free">Wheat-free</option>
         <option value = "dairy-free">Dairy-free</option>
@@ -112,8 +112,7 @@ export default function Home() {
         <option value = "alcohol-cocktail">Alcohol-cocktail</option>
         <option value = "sulfite-free">Sulfite-free</option>
         <option value = "vegetarian">Vegetarian</option>
-         
-    
+             
         </select> 
     
         <button 
