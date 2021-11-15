@@ -4,10 +4,10 @@ import RecipeTile from "../RecipeTile";
 import "../App.css";
 
 export default function Home() {
-    const YOUR_APP_ID = "9a922325"
-    const YOUR_APP_KEY = "96453a31e5925836a664cd6d5cd82a3b"	
+    const YOUR_APP_ID = process.env.REACT_APP_YOUR_APP_ID
+    const YOUR_APP_KEY = process.env.REACT_APP_YOUR_APP_KEY
     
-    const [ingredients, setingredients] = useState([]);
+    // const [ingredients, setingredients] = useState([]);
     const [loading, setLoading] = useState(false);
     const [recipes, setRecipes] = useState(null);
     const [error, setError] = useState("");
