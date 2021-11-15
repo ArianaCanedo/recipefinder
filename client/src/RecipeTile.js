@@ -4,10 +4,12 @@ import './RecipeTile.css';
 
 export default function RecipeTile({ recipe }) {
 
-    //Function to Save to my Favourites
+    //Function to Save my Favourites in DB table(favourites)
+    
     const handleSubmit = e => {
         e.preventDefault();
         
+    // Creates entry to DB
         let options = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -26,12 +28,17 @@ export default function RecipeTile({ recipe }) {
     }, [])
     
 
+    //Call back function to Home.js, to display the Recipes
     return (
         recipe["recipe"] ["image"].match(/\.(jpeg|jpg|gif|png)$/) != null && (
         <div className="recipeTile">
             <a href={recipe.shareAs}><img className= "recipeTile_img" src={recipe["recipe"]["image"]} /> </a>
             <p className= "recipeTile_name">{recipe["recipe"]["label"]}</p>
+            
+            {/* Check recipe link */}
             <a href={`${recipe.recipe.shareAs}`}> check recipe</a>
+
+            {/* Add favourites button */}
             <button type="submit" 
                     className= "bt_favourite" 
                     onClick={handleSubmit}

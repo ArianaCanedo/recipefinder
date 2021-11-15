@@ -4,10 +4,11 @@ import RecipeTile from "../RecipeTile";
 import "../App.css";
 
 export default function Home() {
+
     const YOUR_APP_ID = process.env.REACT_APP_YOUR_APP_ID
     const YOUR_APP_KEY = process.env.REACT_APP_YOUR_APP_KEY
     
-    // const [ingredients, setingredients] = useState([]);
+  
     const [loading, setLoading] = useState(false);
     const [recipes, setRecipes] = useState(null);
     const [error, setError] = useState("");
@@ -23,10 +24,14 @@ export default function Home() {
 
 
     const navigate = useNavigate();
+
+    //On Display favourites click, navigate to favourites
     const handleClick = () => {
         navigate ('./favourites');
-     }    
-    
+     } 
+
+    // function for fetching the recipe from api(EDAMAM)
+
     const getRecipes = async () => {
   
       setLoading(true);
@@ -34,7 +39,7 @@ export default function Home() {
       //   Reset the value
        setRecipes(null);
        setError("");
-  
+      // calling API
        try {
          const response = await fetch(url);
   
@@ -52,18 +57,18 @@ export default function Home() {
       }
     };
   
-    //this submit prevents default reloading 
+    //this onSubmit function triggers when user click on search button 
     const onSubmit = (e) => {
       e.preventDefault();
   
       if (e.target.id == "1") {
         setError("");
-        
+        // function call to get recipes using API
         getRecipes();
       } else {
       setError("");
       setRecipes(null);
-    //   getFavourites();
+  
     } };
   
   
@@ -72,6 +77,7 @@ export default function Home() {
       sethealthLabels(e.target.value);
     };
   
+
     const getFavourites = async () => {
       
        await fetch("/favourites")
@@ -85,17 +91,23 @@ export default function Home() {
            });
       };
     return (
+
+        //defining title of the App
         <div className="app">
         <h1>Recipe Finder App</h1>
         <div> </div>
         <form className="app_searchForm" onSubmit={onSubmit}>
+
+          {/* defining input for recipe name  */}
           <input 
           type="text" 
           className="app_input"
           placeholder="enter ingredient"
           value={query} 
           onChange={(e) => setquery(e.target.value)} />
-            
+
+          {/* Defining drop-down for recipe type */}
+          
         <select className= "app_healthLabels" value={healthLabels} onChange={handleChange}>
                 
         <option value = "vegan">Vegan</option>
@@ -114,6 +126,8 @@ export default function Home() {
         <option value = "vegetarian">Vegetarian</option>
              
         </select> 
+
+        {/* defining search button for given input data  */}
     
         <button 
         type="submit"
@@ -121,6 +135,8 @@ export default function Home() {
         id="1"
         onClick={onSubmit}>
         Search</button>  
+
+        {/* defining button to display my saved favourites */}
     
        <button 
         type="submit"
@@ -128,11 +144,13 @@ export default function Home() {
         id="2"
         onClick={handleClick}>
         Display My Favourites</button>
+
+        {/* display recipes basen on given selection criteria */}
     
         </form>
         <div className="app_recipes">
     
-          {/* //rendering */}
+          {/* rendering and displaying required fields using call back function */}
           {recipes && recipes.map((recipe) => {
             return<RecipeTile recipe={recipe}/>;
           })}

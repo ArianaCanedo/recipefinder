@@ -5,7 +5,7 @@ import Home from "./components/Home";
 import "./App.css";
 import RecipeTile from "./RecipeTile";
 
-
+// defining router to navigate Home and favourites page
 
 function App() {
   

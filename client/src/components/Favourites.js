@@ -7,12 +7,14 @@ export default function Favourites() {
     const [myfavourites, setmyfavourites] = useState([]);
     
     
+
     const getFavourites = async () => {
       
+      //Get data from DB table
         await fetch("/favourites")
            .then(response => response.json())
            .then(recipes =>
-             //check this set favourites
+             // Set favourites
              setmyfavourites(recipes)
             )
            .catch(error => {
@@ -24,6 +26,7 @@ export default function Favourites() {
         getFavourites()
         }, [])
 
+    //Displaying My Favourites data
     return (       
         <div className="fav_recipes">             
              {myfavourites.map((recipe) => 

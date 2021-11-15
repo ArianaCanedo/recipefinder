@@ -18,6 +18,7 @@ const db = require("../model/helper");
     try {
       const { recipename, cuisineType, mealType, shareAs, image } = req.body;
      
+      //Schema from MySql table
       await db(`INSERT INTO favourites (recipename, cuisineType, mealType, shareAs, image) 
       VALUES ("${recipename}", "${cuisineType}", "${mealType}", "${shareAs}", "${image}");`);
       const results = await db("SELECT * FROM favourites ORDER BY id ASC");

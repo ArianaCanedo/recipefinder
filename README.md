@@ -1,6 +1,8 @@
 # recipefinder
+
 ## Description
-User can search for recipes with the ingredient you have, filtering by the choice of the diet-preference. Check the recipe and  can also add it to the favourites, which is saved in the database and can be displayed.
+
+User can search for recipes by entering the ingredient and filtering by their choice of diet-preference. On checking the recipe user gets the ingredients required and preparation of recipe. The recipe can also be saved to the favourites and displayed when required.
 
 ## Setup
 
@@ -22,33 +24,37 @@ User can search for recipes with the ingredient you have, filtering by the choic
   DB_PASS=YOURPASSWORD
 ```
 
+​
+
+# Architeture
 
 ​
-# Architeture
-​
+
 ## Backend
+
 ​
+
 - `routes` contains routes using express for https requests GET and POST.
 
 ![Backend](/pictures/api.jpg)
 
-
-
 ## Database
+
 ### DB design
+
 ​
 ![database.jpg](/pictures/database.jpg)
 ​
+
 # Frontend
 
 - `.env` frontend file, contains secret key for api.
 
 ## userflow
+
 ![User_Flow.png](/pictures/User_Flow.png)
 ​
 ​
 
-
-"credit": 
-   _This is a student project that was created at [CodeOp](http://codeop.tech), a full stack development bootcamp in Barcelona._
-
+"credit":
+_This is a student project that was created at [CodeOp](http://codeop.tech), a full stack development bootcamp in Barcelona._
