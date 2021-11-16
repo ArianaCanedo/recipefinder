@@ -19,7 +19,7 @@ export default function RecipeTile({ recipe }) {
       
          let response = fetch("/favourites", options);
          console.log(response);
-         // need to improve the code handling response success or not          
+                   
           alert("Added to Favourites Successfully");
     }
     
@@ -31,8 +31,10 @@ export default function RecipeTile({ recipe }) {
     //Call back function to Home.js, to display the Recipes
     return (
         recipe["recipe"] ["image"].match(/\.(jpeg|jpg|gif|png)$/) != null && (
-        <div className="recipeTile">
+        <div className="recipeTile"> 
+        {/* image display */}
             <a href={recipe.shareAs}><img className= "recipeTile_img" src={recipe["recipe"]["image"]} /> </a>
+            {/* recipe name display */}
             <p className= "recipeTile_name">{recipe["recipe"]["label"]}</p>
             
             {/* Check recipe link */}

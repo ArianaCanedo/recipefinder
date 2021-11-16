@@ -4,7 +4,7 @@ const db = require("../model/helper");
 
   
   router.get("/", async (req, res) => {
-
+//to get recipes selecting from database
     try {
       const results = await db("SELECT * FROM favourites ORDER BY id ASC;");
       res.send(results.data);
@@ -14,7 +14,7 @@ const db = require("../model/helper");
   });
   
   router.post("/", async (req, res) => {
-    
+    // to post recipes which are saved as my favourites
     try {
       const { recipename, cuisineType, mealType, shareAs, image } = req.body;
      
