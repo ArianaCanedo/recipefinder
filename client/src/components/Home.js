@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom'; 
 import RecipeTile from "../RecipeTile";
+import LoginForm from "./LoginForm";
+import SignUpForm from "./SignupForm"
 import "../App.css";
 
 export default function Home() {
@@ -95,8 +98,9 @@ export default function Home() {
         //defining title of the App
         <div className="app">
         <h1>Recipe Finder App</h1>
-        <div> </div>
-        <form className="app_searchForm" onSubmit={onSubmit}>
+        
+        <div></div>
+        <form className="app_searchForm">
 
           {/* defining input for recipe name  */}
           <input 
@@ -146,6 +150,11 @@ export default function Home() {
         Display My Favourites</button>
 
         {/* display recipes basen on given selection criteria */}
+        <div>
+          <Link to="/register">Sign Up/</Link>
+        <Link to="/login">Log in</Link>
+        </div>
+        
     
         </form>
         <div className="app_recipes">

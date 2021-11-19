@@ -81,3 +81,9 @@
   align-items: baseline;
   background-color: burlywood;
 }
+
+body {
+  padding: 5px;
+  margin: 5px;
+  
+}
