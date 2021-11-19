@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import axios from "axios";
 
 export default function SignupForm() {
     const[newUser, setNewUser] = useState({
@@ -7,38 +10,33 @@ export default function SignupForm() {
         password:"",
         email:"",
     })
-
-    const addNewUser = async (e) => {
-        e.preventDefault();
-        try {
-            const res = await fetch("/register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "aplication/jason",
-                },
-                body: JSON.stringify(newUser),
-            });
-            setNewUser({
-                username: "",
-                password: "",
-                email: "",
-            });
-        }catch (err) {
-            console.log(err);
-        }
-    };
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const {value, name} = event.target;
-        setNewUser((state)=>({...setNewUser, [name]: value}));
+        setNewUser((state)=>({...state, [name]: value}));
     }
+
+    const signup = async (e) => {
+        e.preventDefault();
+
+        axios("/users/register", {
+            method: "POST",
+            data: newUser,
+            })
+            .then((result) => {
+              navigate("/login");
+            })
+            .catch((error) => console.log(error));
+        };
+    
 
     return (
         <div>
             <div><Link to="/">Home</Link></div>
 
         <div className="col-sm-6 offset-sm-3">
-            <form onSubmit={(e) => addNewUser(e)}>
+            <form onSubmit={(e) => signup(e)}>
                 <div>
                     <fieldset>
                         <legend><h1>Sign Up</h1></legend>
@@ -56,7 +54,7 @@ export default function SignupForm() {
                                 <input name="email" type="email" value={newUser.email} onChange={(e)=>handleChange(e)} className="form-control shadow p-3 mb-5 bg-body rounded"/>
                             </div>
                             <div>
-                                <button type="submit" className="btn btn-primary mt-2">Submit</button>
+                                <button type="submit" onClick={signup} className="btn btn-primary mt-2">Submit</button>
                             </div>
                             
                         </div>

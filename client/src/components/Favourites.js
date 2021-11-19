@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import "../App.css";
 import '../RecipeTile.css';
 
@@ -27,8 +28,13 @@ export default function Favourites() {
         }, [])
 
     //Displaying My Favourites data
-    return (       
-        <div className="fav_recipes">             
+    return (      
+      <div>
+        <div>
+          <Link to="/">Home</Link>
+        </div>
+
+        <div className="fav_recipes">           
              {myfavourites.map((recipe) => 
             <div> 
              <img className= "recipeTile_img" src = {recipe.image}/>
@@ -42,5 +48,6 @@ export default function Favourites() {
           )}
         
         </div>
+      </div>  
     )
 }

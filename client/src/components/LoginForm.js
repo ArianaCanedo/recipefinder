@@ -1,47 +1,34 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
-export default function Login() {
-  const [credentials, setCredentials] = useState({
+export default function LoginForm () {
+  const [user, setUser] = useState({
     username: "",
     password: "",
   });
+  const [error, setError] = useState(null);
 
-  const { username, password } = credentials;
+  const auth = useAuth();
 
   const handleChange = (e) => {
-    const { value, name } = e.target;
-    setCredentials((state) => ({ ...setCredentials, [name]: value }));
+    e.persist();
+    setUser((state) => ({ ...state, [e.target.name]: e.target.value }));
   };
 
-  const login = async (e) => {
-      e.preventDefault();
+  const login = async () => {
     try {
-      console.log("IT GETS HERE");
-      const { data } = await axios("/users/login", {
-        method: "POST",
-        data: credentials,
-      });
-      console.log("Here's the data: ", data);
-     localStorage.setItem("token", data.token);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+      const { data } = await axios.post("/users/login", user);
+      console.log(data.token)
 
-  const requestData = async () => {
-    try {
-      const { data } = await axios.post("/users/profile", {
-        heardes: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
-      console.log(data);
-    } catch (err) {
-      console.log(err);
+      //store it locally
+      localStorage.setItem("token", data.token);
+
+      console.log(data.message, data.token);
+    } catch (error) {
+      console.log(error);
     }
-  };
-  const logout = async () => {
-    localStorage.removeItem("token");
   };
 
   return (
@@ -50,49 +37,40 @@ export default function Login() {
         <Link to="/">Home</Link>
       </div>
 
-      <div className="container">
+      <div className="col-sm-6 offset-sm-3">
         <form>
           <div>
             <fieldset>
               <legend>Login</legend>
               <div className="form-row">
                 <div className="col">
-                  <label>Username</label>
+                  <label htmlFor="InputUsername" className="form-label">Username</label>
                   <input
                     name="username"
                     type="text "
-                    value={credentials.username}
+                    value={user.username}
                     onChange={(e) => handleChange(e)}
-                    className="form-control shadow p-3 mb-5 bg-body rounded"
-                  />
+                    className="form-control shadow p-3 mb-5 bg-body rounded" id="InputUsername"/>
                 </div>
                 <div>
-                  <label>Password</label>
+                  <label htmlFor="InputPassword" className="form-label">Password</label>
                   <input
                     name="password"
                     type="password"
-                    value={credentials.password}
+                    value={user.password}
                     onChange={(e) => handleChange(e)}
-                    className="form-control shadow p-3 mb-5 bg-body rounded"
-                  />
+                    className="form-control shadow p-3 mb-5 bg-body rounded" id="InputPassword"/>
                 </div>
                 <div>
                   <button
                     type="submit"
-                    className="btn btn-primary mt-2"
-                    onClick={(e)=>login(e)}
-                  >
+                    className="btn btn-primary m-2"
+                    onClick={(e) => login(e)}>
                     Log in
                   </button>
                 </div>
                 <div>
-                  <button
-                    type="submit"
-                    className="btn btn-primary mt-2"
-                    onClick={logout}
-                  >
-                    Log out
-                  </button>
+                  {error && <div className="alert alert-danger mt-4">{error}</div>}
                 </div>
               </div>
             </fieldset>

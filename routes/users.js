@@ -31,24 +31,26 @@ router.post("/register", async (req, res) => {
   }
 });
 
+// USER LOGIN
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-
   try {
     const results = await db(
       `SELECT * FROM users WHERE username = "${username}"`
-    );
-    const user = results.data[0];
-    if (user) {
-      const user_id = user.id;
-
-      const correctPassword = await bcrypt.compare(password, user.password);
+      );
+      const user = results.data[0];
+      if (user) {
+        const user_id = user.id;
+        
+        const correctPassword = await bcrypt.compare(password, user.password);
+       
 
       if (!correctPassword) throw new Error("Incorrect password");
 
       //create a new token with the username and the id
       var token = jwt.sign({ user_id }, supersecret);
       res.send({ message: "Login successful, here is your token", token });
+      console.log(token);
     } else {
       throw new Error("User does not exist");
     }
@@ -58,7 +60,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/profile", userShouldBeLoggedIn, async (req, res)=>{
-  res.send({message: "Here is the protected data for user" + req.user.user_id });
+  res.send({message: "Here is the protected data for user" + req.user.id});
 })
 
 module.exports = router;
