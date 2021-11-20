@@ -1,63 +1,38 @@
 .app {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 40px 24px;
   color: rgb(47, 7, 141);
   background-color: burlywood;
 }
 
-.app_SearchForm {
-  margin-top: 20px;
-}
-
-.app_input {
-  padding: 6px 16px;
-  min-width: 40px;
-  max-width: 50vw;
-  font-size: 15px;
-}
-
-.app_submit {
-  padding: 6px 16px;
-  font-size: 15px;
-  margin-left: 30px;
+.btn.btn-success {
   background-color: rgb(214, 211, 36);
   border: 2px solid rgb(0, 255, 191);
   border-radius: 4px;
-  color: rgb(12, 46, 39);
+  color: rgb(12, 46, 39) !important;
+  width: 130px;
+  height: 40px;
   cursor: pointer;
 }
-.app_submit:hover {
-  padding: 6px 16px;
-  font-size: 15px;
-  margin-left: 30px;
+.btn.btn-success:hover {
   background-color: rgb(0, 255, 191);
   border: 2px solid rgb(0, 255, 191);
   border-radius: 4px;
-  color: rgb(226, 43, 58);
+  color: rgb(226, 43, 58) !important;
   cursor: pointer;
 }
 
-.app_myfavourites {
-  padding: 6px 16px;
-  font-size: 18px;
-  margin-left: 80px;
+.btn.btn-secondary {
   background-color: rgb(230, 154, 217);
   border: 2px solid rgb(255, 230, 0);
   border-radius: 4px;
-  color: rgb(12, 46, 39);
+  color: rgb(12, 46, 39) !important;
   cursor: pointer;
 }
-.app_myfavourites:hover {
-  padding: 6px 16px;
-  font-size: 18px;
-  margin-left: 80px;
+.btn.btn-secondary:hover {
   background-color: rgb(0, 255, 191);
   border: 2px solid rgb(0, 255, 191);
   border-radius: 4px;
-  color: rgb(226, 43, 58);
+  color: rgb(226, 43, 58) !important;
   cursor: pointer;
 }
 
@@ -68,11 +43,6 @@
   align-items: baseline;
 }
 
-.app_healthLabels {
-  padding: 7px 8px;
-  margin-left: 20px;
-  border-radius: 4px;
-}
 
 .fav_recipes {
   margin-top: 60px;
@@ -83,6 +53,37 @@
 }
 
 body {
-  padding: 5px;
-  margin: 5px;
+  color: rgb(47, 7, 141);
+  background-color: burlywood;
+}
+
+h1{
+  text-align: center;
+}
+
+.input.form-control {
+  width: 79% !important;
+}
+.navbar-expand-sm {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.btn.btn-primary {
+ background-color: rgb(47, 7, 141) !important;
+}
+
+.logo-img {
+  left: 8px;
+  width: 80px;
+  background-size: contain
+}
+
+.form-control {
+  background-color: #fbe8d0 !important;
+  display: flex !important;
+}
+
+.form-select {
+  background-color: #fbe8d0 !important;
 }

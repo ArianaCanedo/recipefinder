@@ -33,8 +33,6 @@ export default function SignupForm() {
 
     return (
         <div>
-            <div><Link to="/">Home</Link></div>
-
         <div className="col-sm-6 offset-sm-3">
             <form onSubmit={(e) => signup(e)}>
                 <div>

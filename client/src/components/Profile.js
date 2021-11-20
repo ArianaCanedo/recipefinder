@@ -23,8 +23,8 @@ export default function Profile () {
 
   return (
     <div>
-      <h1>Profile</h1>
-      <p>Hello</p>
+      <h1>My Profile</h1>
+      <p>My favourite recipes here</p>
     </div>
   );
 }

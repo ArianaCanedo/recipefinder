@@ -94,79 +94,74 @@ export default function Home() {
            });
       };
     return (
-
         //defining title of the App
         <div className="app">
-        <h1>Recipe Finder App</h1>
-        
-        <div></div>
-        <form className="app_searchForm">
+          <h1 className="mb-5">Recipe Finder App</h1>
+          <div className="container">
+            <form className="row g-3 mb-5">
+            <div className="col-md-4 mb-3">
+            {/* defining input for recipe name  */}
+              <input 
+              type="text" 
+              className="form-control shadow"
+              placeholder="enter ingredient"
+              value={query} 
+              onChange={(e) => setquery(e.target.value)} />
+            </div>
 
-          {/* defining input for recipe name  */}
-          <input 
-          type="text" 
-          className="app_input"
-          placeholder="enter ingredient"
-          value={query} 
-          onChange={(e) => setquery(e.target.value)} />
-
-          {/* Defining drop-down for recipe type */}
-          
-        <select className= "app_healthLabels" value={healthLabels} onChange={handleChange}>
+            {/* Defining drop-down for recipe type */}
+            <div className="col-lg-3 mb-3">
+              <select className= "form-select form-select-md mb-3 shadow" value={healthLabels} onChange={handleChange}>
+                  
+                <option value = "vegan">Vegan</option>
+                <option value = "wheat-free">Wheat-free</option>
+                <option value = "dairy-free">Dairy-free</option>
+                <option value = "egg-free">Egg-free</option>
+                <option value = "fish-free">Fish-free</option>
+                <option value = "low-sugar">Low-Sugar</option>
+                <option value = "gluten-free">Gluten-free</option>
+                <option value = "tree-nut-free">Tree-nut-free</option>
+                <option value = "peanut-free">Peanut-free</option>
+                <option value = "vegetarian">Vegetarian</option>
+                <option value = "alcohol-free">Alcohol-free</option>
+                <option value = "alcohol-cocktail">Alcohol-cocktail</option>
+                <option value = "sulfite-free">Sulfite-free</option>
+                <option value = "vegetarian">Vegetarian</option>
                 
-        <option value = "vegan">Vegan</option>
-        <option value = "wheat-free">Wheat-free</option>
-        <option value = "dairy-free">Dairy-free</option>
-        <option value = "egg-free">Egg-free</option>
-        <option value = "fish-free">Fish-free</option>
-        <option value = "low-sugar">Low-Sugar</option>
-        <option value = "gluten-free">Gluten-free</option>
-        <option value = "tree-nut-free">Tree-nut-free</option>
-        <option value = "peanut-free">Peanut-free</option>
-        <option value = "vegetarian">Vegetarian</option>
-        <option value = "alcohol-free">Alcohol-free</option>
-        <option value = "alcohol-cocktail">Alcohol-cocktail</option>
-        <option value = "sulfite-free">Sulfite-free</option>
-        <option value = "vegetarian">Vegetarian</option>
-             
-        </select> 
+              </select> 
+            </div>
+          {/* defining search button for given input data  */}
+            <div className="col-lg-3 mb-3">
+              <button 
+                type="submit"
+                className="btn btn-success btn-sm shadow" 
+                id="1"
+                onClick={onSubmit}>
+                Search</button>
+            </div>   
 
-        {/* defining search button for given input data  */}
-    
-        <button 
-        type="submit"
-        className="app_submit" 
-        id="1"
-        onClick={onSubmit}>
-        Search</button>  
+          {/* defining button to display my saved favourites */}
+            <div className="col-lg-3 mb-3">
+              <button 
+              type="submit"
+              className="btn btn-secondary btn-sm shadow" 
+              id="2"
+              onClick={handleClick}>
+              Display My Favourites</button>
+            </div> 
 
-        {/* defining button to display my saved favourites */}
-    
-       <button 
-        type="submit"
-        className="app_myfavourites" 
-        id="2"
-        onClick={handleClick}>
-        Display My Favourites</button>
-
-        {/* display recipes basen on given selection criteria */}
-        <div>
-          <Link to="/register">Sign Up/</Link>
-        <Link to="/login">Log in</Link>
+          {/* display recipes basen on given selection criteria */}
+          </form>
+          
+          <div className="app_recipes">
+      
+            {/* rendering and displaying required fields using call back function */}
+            {recipes && recipes.map((recipe) => {
+              return<RecipeTile recipe={recipe}/>;
+            })}
+          </div>
         </div>
-        
-    
-        </form>
-        <div className="app_recipes">
-    
-          {/* rendering and displaying required fields using call back function */}
-          {recipes && recipes.map((recipe) => {
-            return<RecipeTile recipe={recipe}/>;
-          })}
-    
-        
-        </div>
-        </div>
+      </div>
         
       );
 }

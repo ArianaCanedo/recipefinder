@@ -30,10 +30,6 @@ export default function Favourites() {
     //Displaying My Favourites data
     return (      
       <div>
-        <div>
-          <Link to="/">Home</Link>
-        </div>
-
         <div className="fav_recipes">           
              {myfavourites.map((recipe) => 
             <div> 
