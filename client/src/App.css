@@ -1,4 +1,5 @@
 .app {
+  justify-content: center;
   align-items: center;
   color: rgb(47, 7, 141);
   background-color: burlywood;
@@ -81,7 +82,6 @@ h1{
 
 .form-control {
   background-color: #fbe8d0 !important;
-  display: flex !important;
 }
 
 .form-select {

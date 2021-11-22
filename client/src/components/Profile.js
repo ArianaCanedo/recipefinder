@@ -22,7 +22,7 @@ export default function Profile () {
   });
 
   return (
-    <div>
+    <div className="container">
       <h1>My Profile</h1>
       <p>My favourite recipes here</p>
     </div>

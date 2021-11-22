@@ -1,27 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import useAxios from "../hooks/useAxios";
 import { Link } from "react-router-dom";
 import "../App.css";
 import '../RecipeTile.css';
+import axios from 'axios';
 
 export default function Favourites() {
-
-    const [myfavourites, setmyfavourites] = useState([]);
-    
+  
+  const [myfavourites, setmyfavourites] = useState([]);
     
 
     const getFavourites = async () => {
-      
       //Get data from DB table
-        await fetch("/favourites")
-           .then(response => response.json())
-           .then(recipes =>
-             // Set favourites
-             setmyfavourites(recipes)
-            )
-           .catch(error => {
-             console.log(error);
-            });
-       };
+      try{
+        const {data} = await axios.get("/favourites", {headers: {authorization: `Bearer ${localStorage.getItem("token")}`}})
+          console.log(data);
+          setmyfavourites(data)
+      } catch(error) {
+        console.log(error);
+      }
+     };
 
        useEffect(() => {
         getFavourites()

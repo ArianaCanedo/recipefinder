@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect } from 'react';
 import {Link} from "react-router-dom";
 import './RecipeTile.css';
@@ -6,21 +7,32 @@ export default function RecipeTile({ recipe }) {
 
     //Function to Save my Favourites in DB table(favourites)
     
+    const addFavourite = async () => {
+
+        try{
+            const results = await axios.post("/favourites", {recipename:recipe.recipe.label, cuisineType:recipe.recipe.cuisineType[0], mealType:recipe.recipe.mealType[0], shareAs:recipe.recipe.shareAs, image:recipe.recipe.image}, {headers: {authorization: `Bearer ${localStorage.getItem("token")}`}})
+            console.log(results) 
+        }catch(error) {
+            console.log(error)
+        }
+    };
+
+
     const handleSubmit = e => {
         e.preventDefault();
-        
+        addFavourite();
     // Creates entry to DB
-        let options = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({recipename:recipe.recipe.label, cuisineType:recipe.recipe.cuisineType[0], 
-                mealType:recipe.recipe.mealType[0], shareAs:recipe.recipe.shareAs, image:recipe.recipe.image})
-          };
+    //     let options = {
+    //         method: "POST",
+    //         headers: { "Content-Type": "application/json", authorization: `Bearer ${localStorage.getItem("token")}`},
+    //         body: JSON.stringify({recipename:recipe.recipe.label, cuisineType:recipe.recipe.cuisineType[0], 
+    //             mealType:recipe.recipe.mealType[0], shareAs:recipe.recipe.shareAs, image:recipe.recipe.image})
+    //       };
       
-         let response = fetch("/favourites", options);
-         console.log(response);
+    //      let response = fetch("/favourites", options);
+    //      console.log(response);
                    
-          alert("Added to Favourites Successfully");
+    //       alert("Added to Favourites Successfully");
     }
     
     useEffect(() => {

@@ -10,8 +10,13 @@ const userShouldBeLoggedIn = require("../guards/UserShouldBeLoggedIn");
 const supersecret = process.env.SUPER_SECRET;
 
 /* GET users listing. */
-router.get("/", function (req, res, next) {
-  res.send("respond with a resource");
+router.get("/", async (req, res) => {
+  try {
+    const results = await db("SELECT * FROM users");
+    res.send(results.data);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
 
 router.post("/register", async (req, res) => {

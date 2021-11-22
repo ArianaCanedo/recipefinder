@@ -24,10 +24,9 @@ function App() {
           <Route path="/" element = {<Home />} />
           <Route path="/login" element= {<LoginForm/>}/>
           <Route path="/register" element= {<SignupForm/>}/>
-          <Route path="/favourites" element= {<Favourites/>}/>
-          <Route path="/profile" element = {
+          <Route path="/favourites" element = {
           <PrivateRoute>
-            <Profile />
+            <Favourites />
           </PrivateRoute>} />
         </Routes>
       </BrowserRouter>
