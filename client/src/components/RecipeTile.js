@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 // import './RecipeTile.css';
 
 export default function RecipeTile({ recipe }) {
@@ -27,21 +29,18 @@ export default function RecipeTile({ recipe }) {
     }
   };
 
+  const auth = useAuth();
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    addFavourite();
-    // Creates entry to DB
-    //     let options = {
-    //         method: "POST",
-    //         headers: { "Content-Type": "application/json", authorization: `Bearer ${localStorage.getItem("token")}`},
-    //         body: JSON.stringify({recipename:recipe.recipe.label, cuisineType:recipe.recipe.cuisineType[0],
-    //             mealType:recipe.recipe.mealType[0], shareAs:recipe.recipe.shareAs, image:recipe.recipe.image})
-    //       };
+    if(auth.ok){
+      addFavourite();
+    }else {
+      navigate("/login");
+    }
 
-    //      let response = fetch("/favourites", options);
-    //      console.log(response);
-
-    //       alert("Added to Favourites Successfully");
+    
   };
 
   useEffect(() => {
@@ -60,7 +59,7 @@ export default function RecipeTile({ recipe }) {
         </a>
         <div>
         {/* recipe name display */}
-        <div className="card-text">
+        <div className="card-text mt-2">
         <h4>{recipe["recipe"]["label"]}</h4>
 
         {/* Check recipe link */}

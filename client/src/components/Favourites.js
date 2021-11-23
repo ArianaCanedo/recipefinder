@@ -44,7 +44,7 @@ export default function Favourites() {
   //Displaying My Favourites data
   return (
     <div>
-      {myfavourites.length === 0 ? <div><h1>Please go home to add a favourite</h1></div> : <div className="container">
+      {myfavourites.length === 0 ? <div><h1>Please go home to add a favourite</h1></div> : <div className="container"><h1>Here are your favourite recipes:</h1>
       <div className="row">
         {myfavourites.map((recipe) => (
           <div key={recipe.id} className="col-lg-4 col-md-6">
