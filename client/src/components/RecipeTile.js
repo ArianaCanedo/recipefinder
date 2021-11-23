@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
 // import './RecipeTile.css';
 
 export default function RecipeTile({ recipe }) {
@@ -29,18 +28,11 @@ export default function RecipeTile({ recipe }) {
     }
   };
 
-  const auth = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(auth.ok){
-      addFavourite();
-    }else {
-      navigate("/login");
-    }
-
-    
+    addFavourite();
   };
 
   useEffect(() => {
