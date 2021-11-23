@@ -44,7 +44,7 @@ export default function Favourites() {
   //Displaying My Favourites data
   return (
     <div>
-      {myfavourites.length === 0 ? <div><h1>Please go home to add a favourite</h1></div> : <div className="container"><h1>Here are your favourite recipes:</h1>
+      {myfavourites.length === 0 ? <div><h1>Please go home to add a favourite</h1></div> : <div className="container"><h1 className="mb-5">Here are your favourite recipes:</h1>
       <div className="row">
         {myfavourites.map((recipe) => (
           <div key={recipe.id} className="col-lg-4 col-md-6">
@@ -53,8 +53,8 @@ export default function Favourites() {
             <div className="card-body">
               <a href={recipe.shareAs}>check recipe</a>
             </div>
-            <div className="card-text">
-            <h4> {recipe.recipename} </h4>
+            <div className="card-text m-2">
+            <h4 className="recipename"> {recipe.recipename} </h4>
             <p>Cuisine Type: {recipe.cuisineType}</p>
             <p>Meal Type: {recipe.mealType}</p>
             <button type="submit" onClick={() => deleteFavourite(recipe.id)} className="btn btn-primary mb-3">Delete</button>
