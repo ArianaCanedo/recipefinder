@@ -3,7 +3,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import e from "express";
+import Noty from "noty";
+
+import "noty/lib/themes/relax.css";
+import "noty/lib/themes/mint.css";
+import "noty/lib/noty.css";
 
 export default function LoginForm() {
   const [user, setUser] = useState({
@@ -22,12 +26,29 @@ export default function LoginForm() {
   const navigate = useNavigate();
 
   const login = async (e) => {
-    // e.preventDefault()
+    e.preventDefault()
     try {
-      await auth.signin(user, () => navigate("/favourites"));
+      await auth.signin(user, signiWasOk, signiWasNotOk);
     } catch (err) {
-      setError(err);
+      // setError(err);
     }
+  };
+
+  const signiWasOk = () => {
+    navigate("/favourites");
+    new Noty({
+      theme: "relax",
+      text: `Welcome ${user.username}!`,
+      type: "success",
+    }).show();
+  };
+
+  const signiWasNotOk = (message) => {
+    new Noty({
+      theme: "relax",
+      text: message,
+      type: "error",
+    }).show();
   };
 
   return (

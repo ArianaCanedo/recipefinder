@@ -67,4 +67,5 @@ router.get("/favourites", userShouldBeLoggedIn, async (req, res) => {
   res.send({ message: "Here is the protected data for user" + req.user.id });
 });
 
+
 module.exports = router;

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom'; 
-import RecipeTile from "../RecipeTile";
+import RecipeTile from "./RecipeTile";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignupForm"
 import "../App.css";
+import axios from 'axios';
 
 export default function Home() {
 
@@ -21,9 +22,6 @@ export default function Home() {
   
     let url = `https://api.edamam.com/search?q=${query}&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&health=${healthLabels}`;
   
-    useEffect(() => {
-    getFavourites()
-    }, [])
 
 
     const navigate = useNavigate();
@@ -81,18 +79,6 @@ export default function Home() {
     };
   
 
-    const getFavourites = async () => {
-      
-       await fetch("/favourites")
-          .then(response => response.json())
-          .then(recipe =>
-            //check this set favourites
-            setmyfavourites(recipe)
-           )
-          .catch(error => {
-            console.log(error);
-           });
-      };
     return (
         //defining title of the App
         <div className="app">
@@ -139,21 +125,22 @@ export default function Home() {
                 onClick={onSubmit}>
                 Search</button>
             </div>   
-
+            
+            {/* Deleted display favourites button since there was no need for it */}
           {/* defining button to display my saved favourites */}
-            <div className="col-lg-3 mb-3">
+            {/* <div className="col-lg-3 mb-3">
               <button 
               type="submit"
               className="btn btn-secondary btn-sm shadow" 
               id="2"
               onClick={handleClick}>
               Display My Favourites</button>
-            </div> 
+            </div>  */}
 
           {/* display recipes basen on given selection criteria */}
           </form>
           
-          <div className="app_recipes">
+          <div className="row">
       
             {/* rendering and displaying required fields using call back function */}
             {recipes && recipes.map((recipe) => {
