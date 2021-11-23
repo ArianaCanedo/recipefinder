@@ -36,8 +36,8 @@ export default function NavBar() {
                     )}
 
                     {auth.isLoggedIn && (
-                    <Link to="/profile" className="nav-link">
-                    Profile
+                    <Link to="/favourites" className="nav-link">
+                    Favourites
                     </Link>
                     )}
 
@@ -86,8 +86,8 @@ export default function NavBar() {
 
                 <li className="nav-item">
                     {auth.isLoggedIn && (
-                    <Link to="/profile" className="nav-link">
-                    Profile
+                    <Link to="/favourites" className="nav-link">
+                    Favourites
                     </Link>
                     )}
                 </li>

@@ -13,7 +13,7 @@ export default function Favourites() {
     const getFavourites = async () => {
       //Get data from DB table
       try{
-        const {data} = await axios.get("/favourites", {headers: {authorization: `Bearer ${localStorage.getItem("token")}`}})
+        const {data} = await axios.get("/users/favourites", {headers: {authorization: `Bearer ${localStorage.getItem("token")}`}})
           console.log(data);
           setmyfavourites(data)
       } catch(error) {

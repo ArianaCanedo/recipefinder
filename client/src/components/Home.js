@@ -30,7 +30,7 @@ export default function Home() {
 
     //On Display favourites click, navigate to favourites
     const handleClick = () => {
-        navigate ('./favourites');
+        navigate ('/favourites');
      } 
 
     // function for fetching the recipe from api(EDAMAM)

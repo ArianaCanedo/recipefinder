@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import e from "express";
 
 export default function LoginForm() {
   const [user, setUser] = useState({
@@ -17,19 +19,14 @@ export default function LoginForm() {
     setUser((state) => ({ ...state, [e.target.name]: e.target.value }));
   };
 
+  const navigate = useNavigate();
+
   const login = async (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     try {
-      const { data } = await axios.post("/users/login", user);
-      console.log(data.token);
-
-      //store it locally
-      localStorage.setItem("token", data.token);
-
-      console.log(data.message, data.token);
-      console.log("Here is your token");
-    } catch (error) {
-      console.log(error);
+      await auth.signin(user, () => navigate("/favourites"));
+    } catch (err) {
+      setError(err);
     }
   };
 
@@ -39,7 +36,9 @@ export default function LoginForm() {
         <form>
           <div>
             <fieldset>
-              <legend><h1>Login</h1></legend>
+              <legend>
+                <h1>Login</h1>
+              </legend>
               <div className="form-row">
                 <div className="col">
                   <label htmlFor="InputUsername" className="form-label">
