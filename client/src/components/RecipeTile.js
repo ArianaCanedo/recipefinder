@@ -31,8 +31,8 @@ export default function RecipeTile({ recipe }) {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     addFavourite();
+    navigate("/favourites")
   };
 
   useEffect(() => {
